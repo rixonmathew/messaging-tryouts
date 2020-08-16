@@ -1,0 +1,17 @@
+tibco:
+  url: "tcp://localhost:7222"
+  user: rixon
+  password: tibco
+server:
+  port: 9898
+info:
+  name: Tibco EMS Sample Application
+  description: Tibco EMS Sample Application
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin:
+      client-id: messaging-tryouts
+    consumer:
+      group-id: foo
+
