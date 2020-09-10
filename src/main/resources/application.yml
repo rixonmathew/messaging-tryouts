@@ -13,5 +13,5 @@ spring:
     admin:
       client-id: messaging-tryouts
     consumer:
-      group-id: foo
+      group-id: contract_consumers
 

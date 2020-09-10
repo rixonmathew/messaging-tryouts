@@ -81,9 +81,10 @@ public class MessagingService {
                 .parallel()
                 .forEach(i -> {
 
+                    String key = "KEY-"+i;
                     String message ="Message to Kafka " +i;
                     ListenableFuture<SendResult<String, String>> future =
-                            kafkaTemplate.send(CONTRACT_UPDATES_KAFKA_TOPIC, message);
+                            kafkaTemplate.send(CONTRACT_UPDATES_KAFKA_TOPIC, key,message);
 
                     future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 

@@ -11,8 +11,9 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_UPDATES_KAFKA_TOPIC;
+import static com.rixon.learn.tibcoems.util.Constants.KAFKA_GROUP_ID;
 
-@KafkaListener(topics = CONTRACT_UPDATES_KAFKA_TOPIC)
+@KafkaListener(topics = CONTRACT_UPDATES_KAFKA_TOPIC,groupId = KAFKA_GROUP_ID)
 @Component
 public class ContractUpdateProcessorFromKafkaTopics {
 
