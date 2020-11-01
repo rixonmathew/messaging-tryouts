@@ -22,8 +22,8 @@ public class KafkaTopicConfig {
         return new KafkaAdmin(configs);
     }
 
-    @Bean
-    public NewTopic instrumentUpdatesKafkaTopic() {
-        return new NewTopic("instrument_updates", 5, (short) 1);
-    }
+//    @Bean
+//    public NewTopic instrumentUpdatesKafkaTopic() {
+//        return new NewTopic("instrument_updates", 5, (short) 1);
+//    }
 }
