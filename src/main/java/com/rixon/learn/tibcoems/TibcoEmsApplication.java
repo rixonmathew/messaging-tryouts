@@ -26,8 +26,10 @@ public class TibcoEmsApplication {
 
     @Bean
     RouterFunction<ServerResponse> routerFunction(MessagingService messagingService) {
-        return route(GET("/publishcontractsems/{count}"),
+        return route(GET("/publishcontractsems/queue/{count}"),
                 serverRequest -> ok().body(messagingService.publishContractsToEMSQueue(Integer.parseInt(serverRequest.pathVariable("count"))), String.class))
+                .andRoute(GET("publishcontractsems/topic/{count}"),
+                        serverRequest -> ok().body(messagingService.publishContractsToEMSTopic(Integer.parseInt(serverRequest.pathVariable("count"))), String.class))
                 .andRoute(GET("/publishcontractskafka/{count}"),
                         serverRequest -> ok().body(messagingService.publishContractsToKafkaDestinations(Integer.parseInt(serverRequest.pathVariable("count"))), String.class));
     }

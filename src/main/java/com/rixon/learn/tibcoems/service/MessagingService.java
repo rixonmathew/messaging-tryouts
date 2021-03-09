@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.stream.IntStream;
 
 import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_UPDATES;
+import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_BROADCAST;
 import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_UPDATES_KAFKA_TOPIC;
 
 @Service
@@ -53,7 +54,7 @@ public class MessagingService {
                     });
                 });
 
-        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to EMS", count, System.currentTimeMillis() - startTime));
+        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to EMS Queue [%s]", count, System.currentTimeMillis() - startTime,CONTRACT_UPDATES));
     }
 
     public Mono<String> publishContractsToEMSTopic(int count) {
@@ -62,14 +63,14 @@ public class MessagingService {
         IntStream.rangeClosed(1, count)
                 .parallel()
                 .forEach(i -> {
-                    jmsTemplateTopic.send(CONTRACT_UPDATES, session -> {
+                    jmsTemplateTopic.send(CONTRACT_BROADCAST, session -> {
                         Message message = session.createTextMessage("Testing message " + i);
                         message.setJMSCorrelationID(UUID.randomUUID().toString());
                         return message;
                     });
                 });
 
-        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to EMS", count, System.currentTimeMillis() - startTime));
+        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to EMS Topic [%s]", count, System.currentTimeMillis() - startTime,CONTRACT_BROADCAST));
     }
 
     public Mono<String> publishContractsToKafkaDestinations(int count) {
@@ -102,7 +103,7 @@ public class MessagingService {
 
                 });
 
-        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to Kafka", count, System.currentTimeMillis() - startTime));
+        return Mono.just(String.format("Published [%d] contracts in time [%d] ms to Kafka Topic [%s]", count, System.currentTimeMillis() - startTime,CONTRACT_UPDATES_KAFKA_TOPIC));
     }
 
 }

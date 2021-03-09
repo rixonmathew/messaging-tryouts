@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
+import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_BROADCAST;
 import static com.rixon.learn.tibcoems.util.Constants.CONTRACT_UPDATES;
 
 @Component
@@ -23,6 +24,15 @@ public class ContractUpdateProcessor {
     )
     @Transactional(propagation = Propagation.REQUIRED,transactionManager = "transactionManager")
     public void processContractUpdates(Message message) throws JMSException {
-        LOGGER.info("Got message [{}]",message.getBody(String.class));
+        LOGGER.info("Got message [{}] from queue",message.getBody(String.class));
+    }
+
+    @JmsListener(containerFactory = "jmsListenerContainerFactory",
+                 destination = CONTRACT_BROADCAST,
+                 concurrency = "10-20"
+    )
+    @Transactional(propagation = Propagation.REQUIRED,transactionManager = "transactionManager")
+    public void processContractUpdatesFromTopic(Message message) throws JMSException {
+        LOGGER.info("Got message [{}] from topic",message.getBody(String.class));
     }
 }
