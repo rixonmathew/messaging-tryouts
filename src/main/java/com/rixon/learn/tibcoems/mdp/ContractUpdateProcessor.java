@@ -27,7 +27,7 @@ public class ContractUpdateProcessor {
         LOGGER.info("Got message [{}] from queue",message.getBody(String.class));
     }
 
-    @JmsListener(containerFactory = "jmsListenerContainerFactory",
+    @JmsListener(containerFactory = "jmsListenerContainerFactoryPubSub",
                  destination = CONTRACT_BROADCAST,
                  concurrency = "10-20"
     )

@@ -71,4 +71,16 @@ public class TibcoConfiguration {
         return factory;
     }
 
+    @Bean
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactoryPubSub(ConnectionFactory connectionFactory) {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setTransactionManager(transactionManager);
+        factory.setSessionTransacted(true);
+        factory.setPubSubDomain(true);
+        factory.setErrorHandler(throwable -> LOGGER.error("Error creating new message listener factory for topics",throwable));
+        factory.setCacheLevel(DefaultMessageListenerContainer.CACHE_CONSUMER);
+        return factory;
+    }
+
 }

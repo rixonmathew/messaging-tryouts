@@ -20,8 +20,8 @@
             <totalSizeCap>100MB</totalSizeCap>
         </rollingPolicy>
     </appender>
-    <root level="info">
+    <root level="info">ƒ
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="SAVE-TO-FILE"/>
+<!--        <appender-ref ref="SAVE-TO-FILE"/>-->
     </root>
 </configuration>
