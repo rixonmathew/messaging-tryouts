@@ -36,18 +36,28 @@ public class TibcoConfiguration {
     private PlatformTransactionManager transactionManager;
 
     @Bean
-    public ConnectionFactory connectionFactory() {
-        UserCredentialsConnectionFactoryAdapter userCredentialsConnectionFactoryAdapter = new UserCredentialsConnectionFactoryAdapter();
-        userCredentialsConnectionFactoryAdapter.setUsername(user);
-        userCredentialsConnectionFactoryAdapter.setPassword(password);
+    public CredentialsFetcher credentialsFetcher() {
+        return new CredentialsFetcher(user,password);
+    }
+
+    @Bean
+    public CustomCredentialsConnectionFactoryAdapter customCredentialsConnectionFactoryAdapter(CredentialsFetcher credentialsFetcher) {
+        CustomCredentialsConnectionFactoryAdapter customCredentialsConnectionFactoryAdapter = new CustomCredentialsConnectionFactoryAdapter();
+        customCredentialsConnectionFactoryAdapter.setCredentialsFetcher(credentialsFetcher);
         TibjmsConnectionFactory tibjmsConnectionFactory = new TibjmsConnectionFactory(url,null,emsProperties());
         try {
             tibjmsConnectionFactory.setClientID("messaging-tryouts");
         } catch (JMSException e) {
             LOGGER.warn("Could not set client-id",e);
         }
-        userCredentialsConnectionFactoryAdapter.setTargetConnectionFactory(tibjmsConnectionFactory);
-        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(userCredentialsConnectionFactoryAdapter);
+        customCredentialsConnectionFactoryAdapter.setTargetConnectionFactory(tibjmsConnectionFactory);
+        return customCredentialsConnectionFactoryAdapter;
+
+    }
+
+    @Bean
+    public ConnectionFactory connectionFactory(CustomCredentialsConnectionFactoryAdapter customCredentialsConnectionFactoryAdapter) {
+        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(customCredentialsConnectionFactoryAdapter);
         cachingConnectionFactory.setCacheConsumers(true);
         cachingConnectionFactory.setCacheProducers(true);
         cachingConnectionFactory.setSessionCacheSize(10);
