@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -22,7 +20,6 @@ public class ContractUpdateProcessor {
                  destination = CONTRACT_UPDATES,
                  concurrency = "10-20"
     )
-    @Transactional(propagation = Propagation.REQUIRED,transactionManager = "transactionManager")
     public void processContractUpdates(Message message) throws JMSException {
         LOGGER.info("Got message [{}] from queue",message.getBody(String.class));
     }
@@ -31,7 +28,6 @@ public class ContractUpdateProcessor {
                  destination = CONTRACT_BROADCAST,
                  concurrency = "10-20"
     )
-    @Transactional(propagation = Propagation.REQUIRED,transactionManager = "transactionManager")
     public void processContractUpdatesFromTopic(Message message) throws JMSException {
         LOGGER.info("Got message [{}] from topic",message.getBody(String.class));
     }

@@ -9,12 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
-import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -32,8 +30,6 @@ public class TibcoConfiguration {
     @Value("${tibco.password}")
     private String password;
 
-    @Autowired
-    private PlatformTransactionManager transactionManager;
 
     @Bean
     public CredentialsFetcher credentialsFetcher() {
@@ -45,11 +41,6 @@ public class TibcoConfiguration {
         CustomCredentialsConnectionFactoryAdapter customCredentialsConnectionFactoryAdapter = new CustomCredentialsConnectionFactoryAdapter();
         customCredentialsConnectionFactoryAdapter.setCredentialsFetcher(credentialsFetcher);
         TibjmsConnectionFactory tibjmsConnectionFactory = new TibjmsConnectionFactory(url,null,emsProperties());
-        try {
-            tibjmsConnectionFactory.setClientID("messaging-tryouts");
-        } catch (JMSException e) {
-            LOGGER.warn("Could not set client-id",e);
-        }
         customCredentialsConnectionFactoryAdapter.setTargetConnectionFactory(tibjmsConnectionFactory);
         return customCredentialsConnectionFactoryAdapter;
 
@@ -74,7 +65,7 @@ public class TibcoConfiguration {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setTransactionManager(transactionManager);
+//        factory.setTransactionManager(transactionManager);
         factory.setSessionTransacted(true);
         factory.setErrorHandler(throwable -> LOGGER.error("Error creating new message listener factory",throwable));
         factory.setCacheLevel(DefaultMessageListenerContainer.CACHE_CONSUMER);
@@ -85,7 +76,7 @@ public class TibcoConfiguration {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactoryPubSub(ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setTransactionManager(transactionManager);
+//        factory.setTransactionManager(transactionManager);
         factory.setSessionTransacted(true);
         factory.setPubSubDomain(true);
         factory.setErrorHandler(throwable -> LOGGER.error("Error creating new message listener factory for topics",throwable));

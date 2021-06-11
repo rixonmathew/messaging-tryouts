@@ -8,10 +8,17 @@ info:
   name: Tibco EMS Sample Application
   description: Tibco EMS Sample Application
 spring:
+  jta:
+    transaction-manager-id: messaging-tryouts-tx
   kafka:
     bootstrap-servers: localhost:9092
     admin:
       client-id: messaging-tryouts
     consumer:
       group-id: contract_consumers
-
+management:
+  health:
+    jms:
+      enabled: true
+    db:
+      enabled: false
