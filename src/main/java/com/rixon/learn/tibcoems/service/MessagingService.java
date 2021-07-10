@@ -74,9 +74,6 @@ public class MessagingService {
     }
 
     public Mono<String> publishContractsToKafkaDestinations(int count) {
-
-
-
         long startTime = System.currentTimeMillis();
         IntStream.rangeClosed(1, count)
                 .parallel()
@@ -85,14 +82,14 @@ public class MessagingService {
                     String key = "KEY-"+i;
                     String message ="Message to Kafka " +i;
                     ListenableFuture<SendResult<String, String>> future =
-                            kafkaTemplate.send(CONTRACT_UPDATES_KAFKA_TOPIC, key,message);
+                            kafkaTemplate.send(CONTRACT_UPDATES_KAFKA_TOPIC, i%10,key,message);
 
                     future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 
                         @Override
                         public void onSuccess(SendResult<String, String> result) {
                             LOGGER.info("{}","Sent message=[" + message +
-                                    "] with offset=[" + result.getRecordMetadata().offset() + "]");
+                                    "] with offset=[" + result.getRecordMetadata().offset() + "] and partition ["+result.getRecordMetadata().partition() +"]");
                         }
                         @Override
                         public void onFailure(Throwable ex) {
