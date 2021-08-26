@@ -9,13 +9,13 @@ A simple application to try out messaging concepts using Kafka and Tibco EMS
 To run tests, run the following command
 
 ```bash
-  mvn clean  test
+  mvn clean test
 ```
 
 
 ## Support
 
-For support, raise an issue in gihtub under this project
+For support, raise an issue in github under this project
 
 
 ## Run Locally
@@ -64,25 +64,11 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
-## Features
+## Environment Dependencies
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
+To run this project, you will need kafka and tibco ems running locally.
 
 
 ## Authors
 
 - [@rixonmathew](https://www.github.com/rixonmathew)
-
-  
