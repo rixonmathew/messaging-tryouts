@@ -44,6 +44,14 @@ Start the server
   mvn spring-boot:run
 ```
 
+### Running from ide
+
+Add the below flags to view the actuator endpoints 
+```shell
+-Dcom.sun.management.jmxremote.port=19898
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=false
+```
 
 ## Roadmap
 
