@@ -1,5 +1,5 @@
 tibco:
-  url: "tcp://localhost:7222"
+  url: "tcp://localhost:7233"
   user: rixon
   password: tibco
 server:

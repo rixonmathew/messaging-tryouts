@@ -17,6 +17,12 @@ To run tests, run the following command
 
 For support, raise an issue in github under this project
 
+Install the tibco ems jar manually from product to your repo 
+e.g.
+```shell
+mvn install:install-file -Dfile=D:\tibco\ems\10.1\lib\tibjms.jar -DgroupId=com.tibco.tibjms -DartifactId=tibjms -Dversion=10.1 -Dpackaging=jar
+```
+
 
 ## Run Locally
 
