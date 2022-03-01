@@ -22,7 +22,10 @@ e.g.
 ```shell
 mvn install:install-file -Dfile=D:\tibco\ems\10.1\lib\tibjms.jar -DgroupId=com.tibco.tibjms -DartifactId=tibjms -Dversion=10.1 -Dpackaging=jar
 ```
-
+```shell
+# wsl2
+mvn install:install-file -Dfile=/mnt/d/tibco/ems/10.1/lib/tibjms.jar -DgroupId=com.tibco.tibjms -DartifactId=tibjms -Dversion=10.1 -Dpackaging=jar
+```
 
 ## Run Locally
 
