@@ -11,11 +11,7 @@ spring:
   jta:
     transaction-manager-id: messaging-tryouts-tx
   kafka:
-    bootstrap-servers: localhost:9092
-    admin:
-      client-id: messaging-tryouts
-    consumer:
-      group-id: contract_consumers
+    bootstrap-servers: rixmacmini2011:9092
 management:
   health:
     jms:
@@ -29,3 +25,32 @@ management:
   endpoint:
     health:
       show-details: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin:
+      client-id: messaging-tryouts
+    consumer:
+      group-id: contract_consumers
+
+---
+spring:
+  config:
+    activate:
+      on-profile: rixmacmini2011
+  kafka:
+    bootstrap-servers: rixmacmini2011:9092
+    admin:
+      client-id: messaging-tryouts-rixmacmini2011
+    consumer:
+      group-id: contract_consumers_rixmacmini2011
+
+management:
+  health:
+    jms:
+      enabled: false

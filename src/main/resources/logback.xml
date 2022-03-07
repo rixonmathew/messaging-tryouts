@@ -6,20 +6,20 @@
             </pattern>
         </encoder>
     </appender>
-    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>D:\\app_logs\\messaging_tryouts\\messaging_tryouts.log</file>
-        <encoder>
-            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
-            </pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>D:\\app_logs\\messaging_tryouts\\messaging_tryouts_%d{dd-MM-yyyy}_%i.log
-            </fileNamePattern>
-            <maxFileSize>10MB</maxFileSize>
-            <maxHistory>10</maxHistory>
-            <totalSizeCap>100MB</totalSizeCap>
-        </rollingPolicy>
-    </appender>
+<!--    <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>D:\\app_logs\\messaging_tryouts\\messaging_tryouts.log</file>-->
+<!--        <encoder>-->
+<!--            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n-->
+<!--            </pattern>-->
+<!--        </encoder>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>D:\\app_logs\\messaging_tryouts\\messaging_tryouts_%d{dd-MM-yyyy}_%i.log-->
+<!--            </fileNamePattern>-->
+<!--            <maxFileSize>10MB</maxFileSize>-->
+<!--            <maxHistory>10</maxHistory>-->
+<!--            <totalSizeCap>100MB</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
     <root level="info">ƒ
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="SAVE-TO-FILE"/>-->
