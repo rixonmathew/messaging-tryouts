@@ -19,7 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <tibjms.version>10.1</tibjms.version>
         <atomikos.version>5.0.8</atomikos.version>
         <lombok.version>1.18.20</lombok.version>
