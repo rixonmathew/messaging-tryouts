@@ -19,9 +19,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <tibjms.version>10.1</tibjms.version>
         <atomikos.version>5.0.8</atomikos.version>
+        <lombok.version>1.18.20</lombok.version>
         <!-- Use most recent failsafe and surefire plugin versions -->
         <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
