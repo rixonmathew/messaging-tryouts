@@ -11,7 +11,12 @@ spring:
   jta:
     transaction-manager-id: messaging-tryouts-tx
   kafka:
-    bootstrap-servers: rixmacmini2011:9092
+    bootstrap-servers: localhost:9092
+    admin:
+      client-id: messaging-tryouts
+    consumer:
+      group-id: contract_consumers
+
 management:
   health:
     jms:
